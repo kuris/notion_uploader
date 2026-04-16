@@ -59,4 +59,69 @@ npm run client
 - `SETUP_GUIDE.md`: 상세 설정 및 트러블슈팅 가이드
 
 ---
+---
 Developed with ✨ by Antigravity
+
+<br/>
+
+---
+
+# 📊 Notion Markdown Uploader (English)
+
+A tool that reads Markdown (.md) files from a local folder, generates a one-sentence summary using Gemini AI, and automatically uploads them to a Notion database.
+
+## 🚀 Key Features
+
+- ⚡ **Real-time Dashboard**: Real-time display of upload progress, Estimated Time of Arrival (ETA), and processing speed.
+- 📊 **Vitality Graph**: Visualizes the character count (length) of each uploaded file.
+- 🤖 **Gemini AI Integration**: Analyzes each document's content to generate a concise one-sentence summary.
+- 🔄 **Idempotency Guarantee**: Automatically detects already uploaded files to skip them or update only the summary (prevents duplicates).
+- 🛡️ **Robust Error Handling**: Automatic detection of Notion API Rate Limits (429) and retries with Exponential Backoff.
+- 📋 **Failure Management**: Check failed uploads in a separate tab and retry them individually.
+
+## 🛠️ Setup Guide
+
+### 1. Environment Variables
+Create a `.env` file and enter the following:
+```env
+NOTION_TOKEN=your_notion_internal_integration_token
+NOTION_DATABASE_ID=your_database_id
+GEMINI_API_KEY=your_google_gemini_api_key
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Prepare Notion Database
+The following properties must be defined in your database:
+- **Name** (Title): File name
+- **한줄요약** (Text): AI-generated summary
+- **해시태그** (Multi-select): Tags based on document analysis (optional)
+
+## 🏃 How to Run
+
+```bash
+# Development Mode (Frontend + Backend)
+npm run dev
+```
+
+Or run individually:
+```bash
+# Backend Server
+npm run server
+
+# Frontend Client
+npm run client
+```
+
+After running, visit `http://localhost:5173` in your browser and select a folder.
+
+## 📁 Project Structure
+
+- `src/App.jsx`: Premium UI dashboard and logic
+- `server.js`: Backend for file scanning and Notion/Gemini API processing
+- `lib/gemini.js`: Gemini AI integration module
+- `lib/notion.js`: Notion API integration module
+- `SETUP_GUIDE.md`: Detailed setup and troubleshooting guide
